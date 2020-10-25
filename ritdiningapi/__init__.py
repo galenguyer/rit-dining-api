@@ -6,7 +6,7 @@ import os
 import subprocess
 import requests
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from bs4 import BeautifulSoup
 
 APP = Flask(__name__)
@@ -103,18 +103,4 @@ def _index():
     hours['Sol\'s Underground'] = {
         'open': get_open(hours_divs[45].text)
     }
-
-    if request.args.get('only') is not None:
-        if request.args.get('only').lower() == 'true':
-            matching = {}
-            for k,v in hours.items():
-                if v['open'] == True:
-                    matching[k] = v
-            return jsonify(matching)
-        elif request.args.get('only').lower() == 'false':
-            matching = {}
-            for k,v in hours.items():
-                if v['open'] == False:
-                    matching[k] = v
-            return jsonify(matching)
     return jsonify(hours)
