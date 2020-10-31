@@ -31,7 +31,7 @@ def get_open(text):
 
 
 @APP.route('/api/v1/open')
-def _index():
+def _api_v1_open():
     page = requests.get('https://www.rit.edu/fa/diningservices/places-to-eat/hours')
     parsed_page = BeautifulSoup(page.text, 'html.parser')
     hours_divs = parsed_page.findAll('div', class_='view-places-to-eat')[0].find('div').findAll('div', recursive=False)
