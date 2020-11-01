@@ -1,7 +1,10 @@
 FROM python:3.8-alpine
 MAINTAINER Galen Guyer <galen@galenguyer.com>
 
-RUN ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+RUN apk add tzdata && \
+    cp /usr/share/zoneinfo/America/New_York /etc/localtime && \
+    echo 'America/New_York' > /etc/timezone && \
+    apk del tzdata
 
 WORKDIR /opt/app
 
